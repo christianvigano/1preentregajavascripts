@@ -107,6 +107,8 @@ if (monto === 0) {
     for (let i = plazo; i >= salirwhile ; salirwhile++) {
 
         // extraer los datos para la fecha arrancando del dia que hacemos el calculo
+
+        //esto no me funciona bien. No me corta los meses y demas.
         let date = new Date()
         let day = date.getDate()
         let month = date.getMonth() + salirwhile
