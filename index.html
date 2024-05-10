@@ -3,13 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="scripts.js"></script>
+    <title>3 Enrtrega javaScripts</title>
+
+<!-- conectar con google primero para despues llamar al css-->
+  <!-- con esto importamos fuentes de gllgoe font y luego en el css ponemos el nombre en css-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,300&display=swap"
+    rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    
+    
 </head>
 <body>
 
+    
+   <div class="divTitulo">
+
+        <h1>Bienvenidos al cotizador de creditos hipotecarios</h1>
+
+   </div>
+
+                <div class="divIngreso">
+                    
+                    <label id="labelingreso" for="nombre">Ingrese Monto:</label>
+                    <input type="text" id="monto" name="nombre"> 
+
+
+                </div>
+
+                <div class="divIngreso">
+                    
+                    <label id="labelingreso">Seleccione Plazo</label>
+                        <select name="plazo" id="plazoIngresado">
+                            <option value="-">-</option>
+                            <option value="12">12 Meses</option>
+                            <option value="24">24 Meses</option>
+                            <option value="48">48 Meses</option>
+                        </select>
+
+                </div>
+                <div class="divIngreso">
+
+                    <label id="labelingreso">Ingreso Familiar</label>
+                    <input type="text" id="ingresoFamiliar" required="0">  
+
+                </div>
+          
+
+
+                <div class="divBoton">
 
     
+                    <button type="submit" id="botonProcesar">Procesar</button>
+   
+ 
+
+              </div>
+
+              <div id="imprimeDetalle">
+
+              </div>
+               
     
+<script src="scripts.js"></script>
 </body>
 </html>

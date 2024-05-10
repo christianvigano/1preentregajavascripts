@@ -1,16 +1,5 @@
 
 
-//ingreso de valores para procesar. ESTO EN LA 3 PREENTREGA CAMBIAR A DOM
-let numeroingresado = parseInt(prompt('Ingrese el monto que desea recibir')) ;
-let plazoingresado = parseInt(prompt('Ingrese el plazo de devolucion del dinero'));
-let ingresomensual = parseInt(prompt('Ingrese el ingreso mensual familiar'));
-
-//creo un array con los datos ingresados
-let datosIngresaPersona = []
-
-datosIngresaPersona.push(plazoingresado,ingresomensual);
-
-
 // Clase DE LOS DATOS INGRESADOS
 class DatosIngresados {
 
@@ -24,7 +13,7 @@ class DatosIngresados {
   controlarDatosIngresados(plazoingresado,ingresomensual) {
     
                 //control ingresomensual
-            if (ingresomensual <= 0 || ingresomensual === 0) {
+            if (ingresomensual <= 0 || ingresomensual === 0) { 
             return  alert("El ingreso neto mensual tipeado es incorrecto");
             }
 
@@ -40,22 +29,10 @@ class DatosIngresados {
 }
 
 
-//controlo el array si los datos ingresados son correctos.
-for (let i=0; i<=datosIngresaPersona.length-1; i++) {
-   
-    const controlaDatosIngresados = new DatosIngresados();
-    controlaDatosIngresados.controlarDatosIngresados(datosIngresaPersona[0],datosIngresaPersona[1]);
-   
-}
-
-
-//instancion objeto de clase para usar en funciones.
-const instanciaobjetodatosingresados = new DatosIngresados(numeroingresado, plazoingresado,ingresomensual);
-console.log(instanciaobjetodatosingresados);
 
 
 
-
+//funcion abstracta para calcular Datos Prestamo
  function calcularDatosPrestamo(plazoingresadocalculointeres) {
 
         //declaro variable interes global para usar en la funcion final
@@ -114,12 +91,19 @@ switch (ingresomensualcalcular > 0) {
 
 }
 
+
+
 //function para calcular las cuotas del prestamo
 function calculacuotasprestamos (monto,plazo,interes) {
 
 //controlo monto = 0 en base a la funcion de calculo
 if (monto === 0) {
-alert("En base a los calculos no posee una capacidad crediticia confiable");
+
+    let parrafo = document.createElement("p")
+    parrafo.innerHTML = "<h2> En base a los calculos no posee una capacidad crediticia confiable </h2>"; 
+    document.body.append(parrafo);
+
+  //alert("En base a los calculos no posee una capacidad crediticia confiable");
 return;
 }
 
@@ -137,7 +121,9 @@ interesxcuota = interes / plazo;
 montocapital = monto / plazo;
 
 // imprimo el monto que se aprueb en base a los ingresos mensules.
-document.write (` <br> El monto solicitado no cumple los requisitos. Para el ingreso mensual el monto del prestamos es: ${monto}  </br>` );
+
+
+ // (` <br> El monto solicitado no cumple los requisitos. Para el ingreso mensual el monto del prestamos es: ${monto}  </br>` );
 
 //arranca el bucle para imprimir el detalle de las cuotas
 for (let i = plazo; i >= salirwhile ; salirwhile++) {
@@ -157,8 +143,23 @@ for (let i = plazo; i >= salirwhile ; salirwhile++) {
     totaliva =  (montocapital*iva)/100; 
     totalcuota = (montocapital + ((montocapital*interesxcuota)/100))+totaliva;
 
+    
+
     //imprimo detalle
-    document.write (` <br> Cuota ${salirwhile}: | Monto Capital: ${montocapital} || Iva: ${totaliva} || Monto Total Cuota: ${totalcuota} || Fecha Vencimiento Cuota: ${FechaVencimiento}  </br>` );
+    function imprimirDetalle() {
+      // Creamos un nuevo elemento div
+      var nuevoDiv = document.createElement("p");
+      
+      // Agregamos algún contenido al nuevo div
+      nuevoDiv.innerHTML = (` <br> Cuota ${salirwhile}: | Monto Capital: ${montocapital} || Iva: ${totaliva} || Monto Total Cuota: ${totalcuota} || Fecha Vencimiento Cuota: ${FechaVencimiento}  </br>` );;
+      nuevoDiv.id = "divNuevo";
+     // Obtenemos el contenedor donde queremos agregar el nuevo párrafo
+      const contenedor = document.getElementById("imprimeDetalle");
+      contenedor.appendChild(nuevoDiv);
+
+  
+    }
+    imprimirDetalle();
     
    
 }
@@ -169,7 +170,57 @@ return;
 
 
 
+//obtengo el id del boton para ejecutar el evento
+const botonProcesarCredito = document.getElementById("botonProcesar");
 
+botonProcesarCredito.onclick = () => {
+  
+  let numeroingresado = document.getElementById("monto").value;
+  let plazoingresado = document.getElementById("plazoIngresado").value;
+  let ingresomensual = document.getElementById("ingresoFamiliar").value;
+  
+  
+
+  //creo un array con los datos ingresados
+  let datosIngresaPersona = []
+
+  datosIngresaPersona.push(plazoingresado,ingresomensual);
+
+
+  const instanciaobjetodatosingresados = new DatosIngresados(numeroingresado, plazoingresado,ingresomensual);
+  //console.log(instanciaobjetodatosingresados);
+
+  // Convertimos el objeto a una cadena JSON
+let datosIngresadoJSON = JSON.stringify(instanciaobjetodatosingresados);
+
+// Guardamos la cadena JSON en sessionStorage
+sessionStorage.setItem('datosingresados', datosIngresadoJSON);
+
+//controlo el array si los datos ingresados son correctos.
+for (let i=0; i<=datosIngresaPersona.length-1; i++) {
+   
+  const controlaDatosIngresados = new DatosIngresados();
+  
+  //obtengo el json de la session storage
+  let sessionStorageRecuperada = sessionStorage.getItem('datosingresados');
+  
+
+//parseo de json a objeto
+  let jsonSessionStorage = JSON.parse(sessionStorageRecuperada);
+
+
+
+  //aisgno a variables los datos del objeto de memoria
+  let plazo = jsonSessionStorage.plazocredito;
+  let ingreso = jsonSessionStorage.ingresomensual;
+  
+  //paso valores desestructurados
+  controlaDatosIngresados.controlarDatosIngresados(plazo,ingreso);
+  
+  
+  //controlaDatosIngresados.controlarDatosIngresados(datosIngresaPersona[0],datosIngresaPersona[1]);
+ 
+}
 
 
 //calculo interes. creo objeto de clase simular credito y paso objeto de datos ingresados.
@@ -181,5 +232,13 @@ const   montoprobacion = calcularaprobaacionmonto(instanciaobjetodatosingresados
 console.log(montoprobacion)
 
 
-// llamada a la funcion principal con obstraccion y uso de objetos.
+//llamada a la funcion principal con obstraccion y uso de objetos.
+
 calculacuotasprestamos(montoprobacion,instanciaobjetodatosingresados.plazocredito,interescalculo);
+
+};
+
+
+
+
+

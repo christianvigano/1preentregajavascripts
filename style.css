@@ -1,0 +1,149 @@
+*{
+
+    margin: 0;
+}
+
+
+.divTitulo{
+
+    background-color: lightgreen
+}
+
+
+.divTitulo h1{
+
+    text-align: center;
+    font-family: 'Poppins', sans-serif; 
+}
+
+.divIngreso{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 3%;
+    padding: 10px;
+    
+}
+
+
+.divBoton{
+    margin-top: 5%;
+
+
+}
+
+
+#botonProcesar{
+    padding: 10px 20px; 
+    border: 2px solid transparent; 
+    border-radius: 20px; 
+    background-color: #007bff; 
+    color: #ffffff; 
+    cursor: pointer; 
+    transition: all 0.3s ease; 
+}
+
+#botonProcesar:hover{
+    background-color: #0056b3; 
+    border-color: #0056b3; 
+}
+
+
+
+#ingresoFamiliar {
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-sizing: border-box; 
+    width: 300px; 
+    font-size: 16px; 
+}
+
+
+#ingresoFamiliar:focus {
+    border-color: #007bff; 
+  
+}
+
+
+
+
+
+#monto {
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-sizing: border-box; 
+    width: 300px; 
+    font-size: 16px; 
+}
+
+/* Estilo cuando el input está enfocado */
+#monto:focus {
+    border-color: #007bff; 
+ 
+}
+
+
+
+/* Estilo para el contenedor del select personalizado */
+#plazoIngresado {
+    position: relative;
+    width: 200px; 
+}
+
+/* Estilo para el select oculto */
+#plazoIngresado select {
+    display: none; 
+}
+
+/* Estilo para el select personalizado */
+#plazoIngresado:after {
+    content: '\25BC'; 
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #f1f1f1; 
+    color: black; 
+}
+
+
+#plazoIngresado select option {
+    background-color: #f1f1f1; 
+    color: black; 
+    padding: 12px; 
+}
+
+/* Estilo para las opciones personalizadas al pasar el mouse */
+#plazoIngresado select option:hover {
+    background-color: #e9e9e9; 
+}
+
+
+/* Estilo para todas las etiquetas <label> */
+label {
+    font-family: 'Poppins', sans-serif; 
+    font-weight: bold; 
+    color: #333; 
+    margin-bottom: 5px; 
+    display: block; 
+}
+
+
+label.importante {
+    color: red; 
+}
+
+
+#imprimeDetalle{
+    font-family: 'Poppins', sans-serif; 
+    margin-left: 5px;
+padding: 5px;
+
+}
+
+#imprimeDetalle p {
+    color: ligh; /* Cambiamos el color del texto */
+    font-size: 18px; /* Cambiamos el tamaño de la fuente */
+    margin-bottom: 10px; /* Añadimos un margen inferior */
+}
