@@ -1,5 +1,6 @@
 
 
+
 // Clase DE LOS DATOS INGRESADOS
 class DatosIngresados {
 
@@ -93,6 +94,19 @@ switch (ingresomensualcalcular > 0) {
 
 
 
+
+function validarMes(mes) {
+  // Convierte el valor del mes a un número entero
+  const numeroMes = parseInt(mes, 10);
+
+  // Verifica si el número del mes está en el rango válido (1 a 12)
+  if (numeroMes >= 1 && numeroMes <= 12) {
+      return numeroMes; // El mes es válido
+  } else {
+      return 1; // El mes no es válido
+  }
+}
+
 //function para calcular las cuotas del prestamo
 function calculacuotasprestamos (monto,plazo,interes) {
 
@@ -110,7 +124,7 @@ return;
 //inicializo variables
 
 let salirwhile = 1;
-let montocapital = 0;
+let montocapital= 0;
 let montoiva = 0;
 let totalcuota=0;
 let interesxcuota=0;
@@ -118,7 +132,7 @@ let iva = 21;
 
 //calculo interes por cuota y el monto capital
 interesxcuota = interes / plazo;
-montocapital = monto / plazo;
+montocapital= monto / plazo;
 
 // imprimo el monto que se aprueb en base a los ingresos mensules.
 
@@ -135,13 +149,19 @@ for (let i = plazo; i >= salirwhile ; salirwhile++) {
     let day = date.getDate()
     let month = date.getMonth() + salirwhile
     let year = date.getFullYear()
-
     let FechaVencimiento = (`${day}-0${month}-${year}`);
 
      
     //calculo el total de iva y de cuota
-    totaliva =  (montocapital*iva)/100; 
-    totalcuota = (montocapital + ((montocapital*interesxcuota)/100))+totaliva;
+    totaliva=   (montocapital*iva)/100; 
+
+    //variable para imprimir interes por cuota.
+    let interescuotaimprimir = ((montocapital*interesxcuota)/100).toFixed(2);
+    
+    
+    //varibale para fixear a 2 decimales
+    let totalcuota = (montocapital + ((montocapital*interesxcuota)/100))+totaliva;
+    totalcuota = totalcuota.toFixed(2);
 
     
 
@@ -149,9 +169,10 @@ for (let i = plazo; i >= salirwhile ; salirwhile++) {
     function imprimirDetalle() {
       // Creamos un nuevo elemento div
       var nuevoDiv = document.createElement("p");
+
       
       // Agregamos algún contenido al nuevo div
-      nuevoDiv.innerHTML = (` <br> Cuota ${salirwhile}: | Monto Capital: ${montocapital} || Iva: ${totaliva} || Monto Total Cuota: ${totalcuota} || Fecha Vencimiento Cuota: ${FechaVencimiento}  </br>` );;
+      nuevoDiv.innerHTML = (` <br> Cuota ${salirwhile}: | Monto Capital: ${montocapital} || Iva: ${totaliva} || Interes Cuota: ${interescuotaimprimir} || Monto Total Cuota: ${totalcuota} || Fecha Vencimiento Cuota: ${FechaVencimiento}  </br>` );;
       nuevoDiv.id = "divNuevo";
      // Obtenemos el contenedor donde queremos agregar el nuevo párrafo
       const contenedor = document.getElementById("imprimeDetalle");
