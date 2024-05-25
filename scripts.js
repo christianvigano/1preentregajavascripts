@@ -1,4 +1,27 @@
 
+const jsonPlazo = './data/mesesPlazo.json'
+//hago una promesa para leer el json local.
+fetch(jsonPlazo)
+  .then((response) => response.json())
+  .then(data => {
+
+    //obtengo el selector del select en el html para pasarlo al appendChild
+    const selectElement = document.getElementById('plazoIngresado');
+
+    // Iterar sobre los datos y agregar opciones al select
+    data.forEach(opcion => {
+     
+      //creo un elemento option dentro del select en html
+      const optionElement = document.createElement('option');
+
+      optionElement.value = opcion.id;
+      optionElement.textContent = opcion.id;
+      //Cargo la lista desplegable
+      selectElement.appendChild(optionElement);
+    });
+  });
+
+
 
 
 // Clase DE LOS DATOS INGRESADOS
@@ -15,12 +38,28 @@ class DatosIngresados {
     
                 //control ingresomensual
             if (ingresomensual <= 0 || ingresomensual === 0) { 
-            return  alert("El ingreso neto mensual tipeado es incorrecto");
+            
+          return    Swal.fire({
+                title: 'Error!',
+                text: 'El ingreso mensual no puede ser 0!',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+        })
+            
+        //      return  alert("El ingreso neto mensual tipeado es incorrecto");
             }
 
             //control plazo ingresado
-            if ( plazoingresado <= 0 || plazoingresado === 0 || plazoingresado < 12) {
-            return  alert("El plazo ingresado es incorrecto. Debe ser un valor mayor a 0 y minimo 12 meses");
+            if ( plazoingresado <= 0 || plazoingresado === '-' || plazoingresado < 12) {
+
+              return    Swal.fire({
+                title: 'Error!',
+                text: 'El plazo ingresado es incorrecto',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+        })
+
+            //return  alert("El plazo ingresado es incorrecto. Debe ser un valor mayor a 0 y minimo 12 meses");
             }
 
  }
@@ -34,7 +73,7 @@ class DatosIngresados {
 
 
 //funcion abstracta para calcular Datos Prestamo
- function calcularDatosPrestamo(plazoingresadocalculointeres) {
+  function calcularDatosPrestamo(plazoingresadocalculointeres) {
 
         //declaro variable interes global para usar en la funcion final
         let interescalculo = 0;
@@ -58,6 +97,7 @@ class DatosIngresados {
                 break;
         }
 
+   
     return interescalculo;
 
 }
@@ -113,12 +153,20 @@ function calculacuotasprestamos (monto,plazo,interes) {
 //controlo monto = 0 en base a la funcion de calculo
 if (monto === 0) {
 
-    let parrafo = document.createElement("p")
+   /* let parrafo = document.createElement("p")
     parrafo.innerHTML = "<h2> En base a los calculos no posee una capacidad crediticia confiable </h2>"; 
     document.body.append(parrafo);
 
   //alert("En base a los calculos no posee una capacidad crediticia confiable");
-return;
+return;*/
+  return    Swal.fire({
+    title: 'Error!',
+    text: 'En base a los calculos no posee una capacidad crediticia confiable',
+    icon: 'error',
+    confirmButtonText: 'Aceptar'
+})
+
+
 }
 
 //inicializo variables
@@ -194,12 +242,14 @@ return;
 //obtengo el id del boton para ejecutar el evento
 const botonProcesarCredito = document.getElementById("botonProcesar");
 
-botonProcesarCredito.onclick = () => {
+botonProcesarCredito.onclick =  () => {
+
   
   let numeroingresado = document.getElementById("monto").value;
   let plazoingresado = document.getElementById("plazoIngresado").value;
   let ingresomensual = document.getElementById("ingresoFamiliar").value;
   
+ 
   
 
   //creo un array con los datos ingresados
@@ -245,7 +295,7 @@ for (let i=0; i<=datosIngresaPersona.length-1; i++) {
 
 
 //calculo interes. creo objeto de clase simular credito y paso objeto de datos ingresados.
-const interescalculo = calcularDatosPrestamo(instanciaobjetodatosingresados.plazocredito);
+const interescalculo =  calcularDatosPrestamo(instanciaobjetodatosingresados.plazocredito);
 console.log(interescalculo)
 
 //constante que almacena los datos procesados por dicha funcion con abstraccion y uso de objetos.
