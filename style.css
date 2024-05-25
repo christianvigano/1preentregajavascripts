@@ -3,10 +3,45 @@
     margin: 0;
 }
 
+.header_principal{
+
+    width: 100%; 
+}
+
+
+
+.main_principal{
+
+    bottom: 25;
+    width: 100%; 
+}
+
+
+.footer_principal{
+
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    
+    left: 0;
+    bottom: 0;
+    width: 100%; 
+       
+     
+}
+
+.header_principal,.main_principal,.footer_principal,body  {
+    background: rgb(9, 121, 36);
+    background: -moz-linear-gradient(90deg, rgb(9, 121, 36) 23%, rgb(9, 121, 36) 25%, rgb(9, 121, 36) 61%, rgb(60, 175, 4) 81%);
+    background: -webkit-linear-gradient(90deg, rgb(9, 121, 36) 23%, rgb(9, 121, 36) 25%, rgb(9, 121, 36) 61%, rgb(60, 175, 4) 81%);
+    background: linear-gradient(90deg, rgb(9, 121, 36) 23%, rgb(9, 121, 36) 25%, rgb(9, 121, 36) 61%, rgb(60, 175, 4) 81%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#097924", endColorstr="#3caf04", GradientType=1);
+  }
 
 .divTitulo{
 
-    background-color: lightgreen
+    background-color: rgb(152, 152, 88)
 }
 
 
